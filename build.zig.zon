@@ -1,0 +1,17 @@
+.{
+    .name = .mikualloc,
+    .version = "0.0.0",
+    .fingerprint = 0xf46e2e2822be69d9,
+
+    .dependencies = .{
+        .jemalloc = .{
+            .url = "git+https://github.com/jemalloc/jemalloc#f19f49ef3ed34e1a74851f112677a9045a0b15f8",
+            .hash = "N-V-__8AAOBhOwB-F2rmrhG12Yie6chLGElAazUopEE9wQEQ",
+        },
+    },
+
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+    },
+}
