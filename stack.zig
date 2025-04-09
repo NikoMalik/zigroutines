@@ -6,10 +6,23 @@ const io_uring = linux.IoUring;
 const builtin = @import("builtin");
 const Atomic = std.atomic.Value;
 
+pub const ptrsize = @sizeOf(*anyopaque);
+pub const uintptrmask = 1 << (8 * ptrsize) - 1;
 pub const MAX_CACHED_ATTACKS = 64;
 pub const DEFAULT_SIZE = 1024;
 pub const stack_alignment = cpu_info.info.alignment;
 pub const Stack = []align(stack_alignment) u8;
+
+// Goroutine preemption request.
+// 0xfffffade in hex.
+pub const stackPreempt = uintptrmask & -1314;
+
+// Thread is forking. Causes a split stack check failure.
+// 0xfffffb2e in hex.
+pub const stackFork = uintptrmask & -1234;
+
+// stackPoisonMin is the lowest allowed stack poison value.
+pub const stackPoisonMin = uintptrmask & -4096;
 
 pub const cpu_info = struct {
     asm_t: []const u8,
